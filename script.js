@@ -2,10 +2,11 @@ console.log("Welcome to Spotify");
 
 // Initialize the variables
 let songIndex = 0;
-let audioElement = new Audio('stuff/1.mp3');
+let audioElement = new Audio('songs/1.mp3');
 let masterPlay = document.getElementById('masterPlay');
 let myProgressBar = document.getElementById('myProgressBar');
 let gif = document.getElementById('gif');
+let songItems = Array.from(document.getElementsByClassName('songItem'));
 
 let songs = [
     {songName: "Let me love You", filePath:"songs/1.mp3", coverPath: "covers/1.jpg"},
@@ -16,8 +17,19 @@ let songs = [
     {songName: "Kaash", filePath:"songs/Kaash.mp3", coverPath: "covers/6.jpg"},
     {songName: "Ma Belle", filePath:"songs/Ma Belle.mp3", coverPath: "covers/7.jpg"},
     {songName: "No Competition ", filePath:"songs/No Competition.mp3", coverPath: "covers/8.jpg"},
-    {songName: "Excuses", filePath:"songs/Excuses.mp3", coverPath: "covers/9Kaash"}
+    {songName: "Excuses", filePath:"songs/Excuses.mp3", coverPath: "covers/9.jpg"},
+    {songName: "gede", filePath:"songs/Excuses.mp3", coverPath: "covers/1.jpg"}
 ]
+
+songItems.forEach((element, i) => {
+    // console.log(element, i);
+    element.getElementsByTagName('img')[0].src = songs[i].coverPath;
+    element.getElementsByClassName('songName')[0].innerText = songs[i].songName;
+});
+
+
+
+
 //audioElement.play();
 
 // Handle play/pause click
@@ -50,6 +62,22 @@ myProgressBar.addEventListener('change', () => {
 })
 
 
+// changing 
+
+const makeAllPlays = () => {
+    Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) => {
+        element.classList.remove('fa-circle-pause')
+        element.classList.add('fa-circle-play')
+    })
+}
+
+Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) => {
+    element.addEventListener('click', (e) => {
+        makeAllPlays();
+        e.target.classList.remove('fa-circle-play')
+        e.target.classList.add('fa-circle-pause')
+    })
+})
 
 
 
